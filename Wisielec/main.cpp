@@ -59,6 +59,11 @@ void GetInput()
 
 	if (good_letter)
 	{
+		if (password==visible_password)
+		{
+			password_guessed = true;
+		}
+
 		return;	//jesli litera jest w hasle to koniec funkcji, jesli nie bylo to idziemy dalej zwiekkszajac ilosc bledow
 	}
 
@@ -216,6 +221,8 @@ void DrawHangman(int mistakes_amount)
 void Initialize()
 {
 	password_guessed = false;
+	mistakes = 0;
+	bad_letters = "";
 	visible_password = password;
 
 	for (int i = 0; i < visible_password.size(); i++)
@@ -230,8 +237,6 @@ void Initialize()
 
 void Render(int mistakes_amount)
 {
-	
-
 	DrawHangman(mistakes_amount);
 	PrintMistakes();
 	PrintPassword();
@@ -240,7 +245,7 @@ void Render(int mistakes_amount)
 int main()
 {
 	setlocale(LC_CTYPE, "Polish");
-
+	bool again= false;
 
 	//cout << "This is drawing of your Hanging Man:" << endl << endl;
 
@@ -256,18 +261,26 @@ int main()
 		PrintPassword();
 	}*/
 
-	Initialize();
-		
-	while (mistakes<10 && password_guessed == false)
+	
+
+	do
 	{
-		GetInput();
-		//UpdateGame();
-		
-		Render(mistakes);
+		Initialize();
 
+		while (mistakes < 10 && password_guessed == false)
+		{
+			GetInput();
+			//UpdateGame();
 
-		//mistakes++;
-	}
+			Render(mistakes);
+
+		}
+
+		cout << "Do you want to play again? 1=yes, 0=no" << endl;
+		cin >> again;
+
+	} while (again);
+	
 
 	//ShutDown();
 
