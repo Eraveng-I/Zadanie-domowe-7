@@ -2,6 +2,35 @@
 
 using namespace std;
 
+
+string bad_letters = "abc";
+int mistakes = 3;
+string password = "kotek";
+string visible_password = "";	//zakreskowane has³o ¿eby nie sprawdzaæ w pêtlacha czy dana litera jest ju¿ odkryta
+
+void PrintMistakes()
+{
+	cout << "Mistakes:" << endl;
+
+	for (int i = 0; i < bad_letters.size(); i++)
+	{
+		cout << bad_letters[i] << " ";
+	}
+	cout << endl;
+}
+
+void PrintPassword()
+{
+	cout << "Password:" << endl;
+
+	for (int i = 0; i < visible_password.size(); i++)
+	{
+		cout << visible_password[i] << " ";
+	}
+	cout << endl;
+}
+
+
 void CoutSign(int amount, string sign)
 {
 	for (int i = 0; i < amount; i++)
@@ -158,6 +187,15 @@ void DrawHangman(int mistakes)
 	}
 }
 
+void Initialize()
+{
+	visible_password = password;
+
+	for (int i = 0; i < visible_password.size(); i++)
+	{
+		visible_password[i] = '_';
+	}
+}
 
 int main()
 {
@@ -167,10 +205,16 @@ int main()
 
 	cout << "This is drawing of your Hanging Man:" << endl << endl;
 
+	Initialize();
+
 	for (int i = 0; i <= 10; i++)
 	{
 		cout << "Step " << i << endl;
 		DrawHangman(i);
+
+		PrintMistakes();
+
+		PrintPassword();
 	}
 
 	//Initialize();
