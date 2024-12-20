@@ -3,10 +3,11 @@
 using namespace std;
 
 
-string bad_letters = "abc";
-int mistakes = 3;
+string bad_letters = "";
+int mistakes = 0;
 string password = "kotek";
 string visible_password = "";	//zakreskowane has³o ¿eby nie sprawdzaæ w pêtlacha czy dana litera jest ju¿ odkryta
+bool password_guessed = false;
 
 void PrintMistakes()
 {
@@ -40,10 +41,35 @@ void CoutSign(int amount, string sign)
 	}
 }
 
-
-void DrawHangman(int mistakes)
+void GetInput()
 {
-	switch (mistakes)
+	char letter;
+	bool good_letter = false;
+
+	cin >> letter;
+
+	for (int i = 0; i < password.size(); i++)
+	{
+		if (password[i] == letter)
+		{
+			visible_password[i] = password[i];
+			good_letter = true;
+		}
+	}
+
+	if (good_letter)
+	{
+		return;	//jesli litera jest w hasle to koniec funkcji, jesli nie bylo to idziemy dalej zwiekkszajac ilosc bledow
+	}
+
+	bad_letters = bad_letters + letter;	
+
+	mistakes++;
+}
+
+void DrawHangman(int mistakes_amount)
+{
+	switch (mistakes_amount)
 	{
 	case 0:
 		CoutSign(10, "\n");	//enterowanie
@@ -189,25 +215,38 @@ void DrawHangman(int mistakes)
 
 void Initialize()
 {
+	password_guessed = false;
 	visible_password = password;
 
 	for (int i = 0; i < visible_password.size(); i++)
 	{
 		visible_password[i] = '_';
 	}
+
+	DrawHangman(0);
+	PrintMistakes();
+	PrintPassword();
+}
+
+void Render(int mistakes_amount)
+{
+	
+
+	DrawHangman(mistakes_amount);
+	PrintMistakes();
+	PrintPassword();
 }
 
 int main()
 {
 	setlocale(LC_CTYPE, "Polish");
 
-	int mistakes = 0;
 
-	cout << "This is drawing of your Hanging Man:" << endl << endl;
+	//cout << "This is drawing of your Hanging Man:" << endl << endl;
 
-	Initialize();
+	//Initialize();
 
-	for (int i = 0; i <= 10; i++)
+	/*for (int i = 0; i <= 10; i++)
 	{
 		cout << "Step " << i << endl;
 		DrawHangman(i);
@@ -215,16 +254,20 @@ int main()
 		PrintMistakes();
 
 		PrintPassword();
-	}
+	}*/
 
-	//Initialize();
+	Initialize();
 		
-	//while (/*!ExitGame*/ true)
-	//{
-	//	//GetInput();
-	//	//UpdateGame();
-	//	//Render();
-	//}
+	while (mistakes<10 && password_guessed == false)
+	{
+		GetInput();
+		//UpdateGame();
+		
+		Render(mistakes);
+
+
+		//mistakes++;
+	}
 
 	//ShutDown();
 
