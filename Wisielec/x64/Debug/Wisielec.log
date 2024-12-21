@@ -1,2 +1,3 @@
 ﻿  main.cpp
+E:\Programy\Projekty\Microsoft Visual Studio\Unreal Engine Developer\Zajęcia 15\Zadanie-domowe-7---Unreal-Engine-Developer\Wisielec\main.cpp(229,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
   Wisielec.vcxproj -> E:\Programy\Projekty\Microsoft Visual Studio\Unreal Engine Developer\Zajęcia 15\Zadanie-domowe-7---Unreal-Engine-Developer\Wisielec\x64\Debug\Wisielec.exe

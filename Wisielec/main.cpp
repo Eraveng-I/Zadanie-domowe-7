@@ -1,3 +1,6 @@
+#include<fstream>
+#include <string>
+
 #include <iostream>
 
 using namespace std;
@@ -8,6 +11,8 @@ int mistakes = 0;
 string password = "kotek";
 string visible_password = "";	//zakreskowane has³o ¿eby nie sprawdzaæ w pêtlacha czy dana litera jest ju¿ odkryta
 bool password_guessed = false;
+ifstream password_file;
+int amount = 20;
 
 void PrintMistakes()
 {
@@ -218,11 +223,35 @@ void DrawHangman(int mistakes_amount)
 	}
 }
 
+void SetPassword()
+{
+	// Losow haslo
+	srand(time(nullptr)); // Generator losowy
+	int randomIndex = rand() % 20;
+
+	password_file.open("hasla.txt");
+
+	// Wczytanie x s³owa z pliku do zminnj
+	string word;
+	for (int i = 0;i <= randomIndex;i++)
+	{
+		getline(password_file, word);
+	}
+	password_file.close();
+
+	//cout << "word to " << word << endl;
+
+	password = word;
+}
+
 void Initialize()
 {
 	password_guessed = false;
 	mistakes = 0;
 	bad_letters = "";
+
+	SetPassword();
+
 	visible_password = password;
 
 	for (int i = 0; i < visible_password.size(); i++)
@@ -234,6 +263,8 @@ void Initialize()
 	PrintMistakes();
 	PrintPassword();
 }
+
+
 
 void Render(int mistakes_amount)
 {
@@ -262,7 +293,6 @@ int main()
 	}*/
 
 	
-
 	do
 	{
 		Initialize();
