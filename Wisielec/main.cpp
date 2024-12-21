@@ -2,6 +2,7 @@
 #include <string>
 
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -13,6 +14,8 @@ string visible_password = "";	//zakreskowane has³o ¿eby nie sprawdzaæ w pêtlacha
 bool password_guessed = false;
 ifstream password_file;
 int amount = 20;
+fstream ranking_file;
+int result = 0;
 
 void PrintMistakes()
 {
@@ -36,6 +39,37 @@ void PrintPassword()
 	cout << endl;
 }
 
+void CheckRanking()
+{
+	result = password.size() * password.size() *(10 - mistakes) / 10;
+
+	vector<string> ranking;
+
+	cout << "rozmiar wktora ranking to: " << ranking.size() << endl;
+
+	//ranking.reserve(11);
+
+	for (int i = 0;i < 11;i++)
+	{
+		ranking.push_back("");
+	}
+
+	cout << "rozmiar wktora ranking to: " << ranking.size() << endl;
+
+	ranking_file.open("ranking.txt");
+
+	// Wczytanie x s³owa z pliku do zminnj
+	for (int i = 0;i < 11;i++)
+	{
+		getline(ranking_file, ranking[i]);
+	}
+	ranking_file.close();
+
+	for (int i = 0;i < 11;i++)
+	{
+		cout << ranking[i] << endl;
+	}
+}
 
 void CoutSign(int amount, string sign)
 {
@@ -67,6 +101,8 @@ void GetInput()
 		if (password==visible_password)
 		{
 			password_guessed = true;
+
+			CheckRanking();
 		}
 
 		return;	//jesli litera jest w hasle to koniec funkcji, jesli nie bylo to idziemy dalej zwiekkszajac ilosc bledow
