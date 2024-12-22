@@ -54,6 +54,92 @@ void GetToHallOfFame (vector<string> &ranking, int i, int place_size)
 	ranking[i] = name;
 }
 
+void SortRanking (vector<string> &ranking, int i)
+{
+	bool hard_break = false;
+	for (;i > 1;i--)
+	{
+		//iscie po znaku
+		for (int j = ranking[i-1].size() - 1;j >= 0;j--)
+		{
+			if (ranking[i-1][j] == '-')
+			{
+				cout << "- jest na pozycji: " << j << endl;
+
+				//sprawdzamy liczbe na mijscu wczsnij
+
+				j = j + 2;	//przejsci 2 znaki w prawo gdzie zaczyna sie liczba
+
+				int number_length = ranking[i-1].size() - j;	//ile cyfr ma ta liczba (zakladaj¹c z po liczbie nic nic nie ma)	
+
+				string substr = ranking[i-1].substr(j, number_length);
+
+				int number = stoi(substr);
+
+				/*for (int k = number_length;k > 0;k--)
+				{
+
+				}*/
+
+				cout << "wyciagnity numr to: " << number << endl;
+
+				if (number < result)
+				{
+					string place1="";
+					string place2="";
+
+					//zbiramy 1 mijsc do zamiany
+					for (int a = 0;;a++)
+					{
+						if (ranking[i-1][a] == '.')
+						{
+							break;
+						}
+						else
+							{
+								place1 = place1 + ranking[i - 1][a];
+							}
+					}
+
+					//zbiramy 2 mijsc do zamiany
+					for (int a = 0;;a++)
+					{
+						if (ranking[i][a] == '.')
+						{
+							break;
+						}
+						else
+						{
+							place2 = place2 + ranking[i][a];
+						}
+					}
+
+					ranking[i - 1]=place2+  ranking[i - 1].substr(place1.size(), ranking[i - 1].size()- place1.size());		//to jst 2 mijsc + 1 linijka po odciciu 1 mijsca
+					
+					ranking[i]=place1+  ranking[i].substr(place2.size(), ranking[i].size()- place2.size());		//to samo na odwrot
+
+					swap(ranking[i - 1], ranking[i]);
+
+
+
+					break;
+				}
+				else
+					{
+						hard_break = true;
+						break;
+					}
+
+			}
+		}
+
+		if (hard_break)
+		{
+			break;
+		}
+	}
+}
+
 void CheckRanking()
 {
 	result = password.size() * password.size() *(10 - mistakes) / 10;
@@ -111,10 +197,16 @@ void CheckRanking()
 					GetToHallOfFame(ranking, i + 1, 3);
 
 					//sort czy wejdzie wyzej
+					SortRanking(ranking, i + 1);
+					hard_break = true;
+					break;
 				}
 				else if(i==9)
 					{
 						GetToHallOfFame(ranking, i + 1, 4);		//wstawiamy na 10 miejsce a tam 10 zajmuje 1 znak wiêcej
+						SortRanking(ranking, i + 1);
+						hard_break = true;
+						break;
 					}
 					else if (i == 10)
 						{
@@ -140,8 +232,9 @@ void CheckRanking()
 								GetToHallOfFame(ranking, 10, 4);		//wstawiamy na 10 miejsce a tam 10 zajmuje 1 znak wiêcej
 
 								//sort czy wjdzi wyzej
-
+								SortRanking(ranking, 10);
 								hard_break = true;
+								break;
 							}
 
 						}
@@ -149,6 +242,7 @@ void CheckRanking()
 				break;
 			}
 		}
+
 		if (hard_break)
 		{
 			break;
