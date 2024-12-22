@@ -39,11 +39,27 @@ void PrintPassword()
 	cout << endl;
 }
 
+void GetToHallOfFame (vector<string> &ranking, int i, int place_size)
+{
+	string name;
+	cout << "Podaj swoja nazwê" << endl;
+	cin >> name;
+
+	name = ranking[i].substr(0, place_size) + name + " - " + to_string(result);
+	//wyciagnac do funkcji dodani do rankingu => 1. sprawdz czy trzba walczyc =>2. jak ni to znajdz woln mijsc i sort =>3. jak tak to sprawdz czy wjdzi=>4. jak ni to nic a jak tak to wchodzi na 10 i sort
+
+	cout << "Nowe name to:" << endl;
+	cout << name << endl;
+
+	ranking[i] = name;
+}
+
 void CheckRanking()
 {
 	result = password.size() * password.size() *(10 - mistakes) / 10;
 
 	vector<string> ranking;
+	bool hard_break = false;
 
 	cout << "rozmiar wktora ranking to: " << ranking.size() << endl;
 
@@ -56,19 +72,90 @@ void CheckRanking()
 
 	cout << "rozmiar wktora ranking to: " << ranking.size() << endl;
 
+
+	// Wczytanie rankingu
 	ranking_file.open("ranking.txt");
 
-	// Wczytanie x s³owa z pliku do zminnj
 	for (int i = 0;i < 11;i++)
 	{
 		getline(ranking_file, ranking[i]);
 	}
 	ranking_file.close();
 
+	//for debug
 	for (int i = 0;i < 11;i++)
 	{
 		cout << ranking[i] << endl;
 	}
+
+	//sprawdznie czy trzeba rywalizowac o wejsci do rankingu
+	//iscie po linijkach - najpozniej stanie w linijce z indx=0 bo tam jest wzor
+	for (int i = ranking.size() - 1;i >= 0;i--)
+	{
+		//iscie po znaku
+		for (int j = ranking[i].size() - 1;j >= 0;j--)
+		{
+			if (ranking[i][j] == '-')
+			{
+				cout << "- jest na pozycji: " << j << endl;
+
+				if (i < 9)
+				{
+					if (i == 0)
+					{
+						GetToHallOfFame(ranking, i + 1, 3);		//skoro to 1 zapisany wynik to nie bedzie sortowania
+						hard_break = true;
+						break;
+					}
+
+					GetToHallOfFame(ranking, i + 1, 3);
+
+					//sort czy wejdzie wyzej
+				}
+				else if(i==9)
+					{
+						GetToHallOfFame(ranking, i + 1, 4);		//wstawiamy na 10 miejsce a tam 10 zajmuje 1 znak wiêcej
+					}
+					else if (i == 10)
+						{
+							//sprawdzamy czy pobije 10 miejsc
+
+							j = j + 2;	//przejsci 2 znaki w prawo gdzie zaczyna sie liczba
+
+							int number_length = ranking[i].size() - j;	//ile cyfr ma ta liczba (zakladaj¹c z po liczbie nic nic nie ma)	
+
+							string substr = ranking[i].substr(j, number_length);
+
+							int number = stoi(substr);
+
+							/*for (int k = number_length;k > 0;k--)
+							{
+
+							}*/
+
+							cout << "wyciagnity numr to: " << number << endl;
+
+							if (number < result)
+							{
+								GetToHallOfFame(ranking, 10, 4);		//wstawiamy na 10 miejsce a tam 10 zajmuje 1 znak wiêcej
+
+								//sort czy wjdzi wyzej
+
+								hard_break = true;
+							}
+
+						}
+
+				break;
+			}
+		}
+		if (hard_break)
+		{
+			break;
+		}
+	}
+
+
 }
 
 void CoutSign(int amount, string sign)

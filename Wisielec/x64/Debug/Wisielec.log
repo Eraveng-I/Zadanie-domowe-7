@@ -1,4 +1,7 @@
 ﻿  main.cpp
-E:\Programy\Projekty\Microsoft Visual Studio\Unreal Engine Developer\Zajęcia 15\Zadanie-domowe-7---Unreal-Engine-Developer\Wisielec\main.cpp(44,62): warning C4267: "=": konwersja z "size_t" do "int", możliwa utrata danych
-E:\Programy\Projekty\Microsoft Visual Studio\Unreal Engine Developer\Zajęcia 15\Zadanie-domowe-7---Unreal-Engine-Developer\Wisielec\main.cpp(265,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
+E:\Programy\Projekty\Microsoft Visual Studio\Unreal Engine Developer\Zajęcia 15\Zadanie-domowe-7---Unreal-Engine-Developer\Wisielec\main.cpp(59,62): warning C4267: "=": konwersja z "size_t" do "int", możliwa utrata danych
+E:\Programy\Projekty\Microsoft Visual Studio\Unreal Engine Developer\Zajęcia 15\Zadanie-domowe-7---Unreal-Engine-Developer\Wisielec\main.cpp(93,13): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
+E:\Programy\Projekty\Microsoft Visual Studio\Unreal Engine Developer\Zajęcia 15\Zadanie-domowe-7---Unreal-Engine-Developer\Wisielec\main.cpp(96,14): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
+E:\Programy\Projekty\Microsoft Visual Studio\Unreal Engine Developer\Zajęcia 15\Zadanie-domowe-7---Unreal-Engine-Developer\Wisielec\main.cpp(125,26): warning C4267: "inicjowanie": konwersja z "size_t" do "int", możliwa utrata danych
+E:\Programy\Projekty\Microsoft Visual Studio\Unreal Engine Developer\Zajęcia 15\Zadanie-domowe-7---Unreal-Engine-Developer\Wisielec\main.cpp(352,12): warning C4244: "argument": konwersja z "time_t" do "unsigned int", możliwa utrata danych
   Wisielec.vcxproj -> E:\Programy\Projekty\Microsoft Visual Studio\Unreal Engine Developer\Zajęcia 15\Zadanie-domowe-7---Unreal-Engine-Developer\Wisielec\x64\Debug\Wisielec.exe
