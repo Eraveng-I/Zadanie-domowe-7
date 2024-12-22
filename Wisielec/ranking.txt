@@ -1,11 +1,11 @@
 [miejsce]. [nazwa] - [wynik]
-1. Ciri - 21
-2. 
-3. 
-4. 
-5. 
-6. 
-7. 
-8. 
-9. 
-10. 
+1. Ciri - 225
+2. Jola - 96
+3. Cassandra - 90
+4. Eva - 84
+5. Dominika - 80
+6. Basia - 60
+7. Anna - 48
+8. Fiona - 44
+9. Iza - 44
+10. Hania - 25

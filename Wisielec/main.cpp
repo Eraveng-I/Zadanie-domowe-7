@@ -140,6 +140,17 @@ void SortRanking (vector<string> &ranking, int i)
 	}
 }
 
+void SaveResults(vector<string>& ranking)
+{
+	ranking_file.open("ranking.txt");
+
+	for (int i = 0;i < ranking.size();i++)
+	{
+		ranking_file << ranking[i] << endl;
+	}
+	ranking_file.close();
+}
+
 void CheckRanking()
 {
 	result = password.size() * password.size() *(10 - mistakes) / 10;
@@ -249,7 +260,7 @@ void CheckRanking()
 		}
 	}
 
-
+	SaveResults(ranking);
 }
 
 void CoutSign(int amount, string sign)
@@ -481,7 +492,10 @@ void Initialize()
 	PrintPassword();
 }
 
-
+//void UpdateGame()
+//{
+//
+//}
 
 void Render(int mistakes_amount)
 {
